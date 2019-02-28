@@ -27,10 +27,12 @@ app.get('/setup', function(req, res){
 
 function setupGetStartedButton(res){
         var messageData = {
-                "get_started":
-                    {
+            "setting-type":"call_to_actions",
+            "thread_state":"new_thread",
+            "get_started":
+                {
                     "payload":"USER_DEFINED_PAYLOAD"
-                    }
+                }
         };
 
         // Start the request
