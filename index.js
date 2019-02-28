@@ -10,16 +10,45 @@ app.listen((process.env.PORT || 3000));
 // Server frontpage
 app.get('/', function (req, res) {
     res.send('This is TestBot Server');
+
+    var messageData = {
+                "get_started":[
+                {
+                    "payload":"USER_DEFINED_PAYLOAD"
+                    }
+                ]
+        };
+
+        // Start the request
+        request({
+            url: 'https://graph.facebook.com/v2.6/me/messenger_profile?access_token='+ process.env.PAGE_ACCESS_TOKEN,
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            form: messageData
+        },
+        function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+                // Print out the response body
+                res.send(body);
+
+            } else { 
+                // TODO: Handle errors
+                res.send(body);
+            }
+        });
 });
 
 // Facebook Webhook
 app.get('/webhook', function (req, res) {
     if (req.query['hub.verify_token'] === 'testbot_verify_token') {
         res.send(req.query['hub.challenge']);
+
+        setupGetStartedButton(res)
     } else {
         res.send('Invalid verify token');
     }
 });
+
 
 // // handler receiving messages
 // app.post('/webhook', function (req, res) {
