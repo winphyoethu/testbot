@@ -12,8 +12,7 @@ app.get('/', function (req, res) {
     res.send('This is TestBot Server');
 
     var messageData = {
-                "get_started":[
-                {
+                "get_started":[{
                     "payload":"USER_DEFINED_PAYLOAD"
                     }
                 ]
@@ -33,6 +32,7 @@ app.get('/', function (req, res) {
                 res.send(body);
             } else { 
                 // TODO: Handle errors
+                console.log("RESULT ERR :: ",body)
                 res.send(body);
             }
         });
