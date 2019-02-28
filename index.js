@@ -10,21 +10,8 @@ app.listen((process.env.PORT || 3000));
 // Server frontpage
 app.get('/', function (req, res) {
     res.send('This is TestBot Server');
-});
 
-// Facebook Webhook
-app.get('/webhook', function (req, res) {
-    if (req.query['hub.verify_token'] === 'testbot_verify_token') {
-        res.send(req.query['hub.challenge']);
-
-        setupGetStartedButton(res)
-    } else {
-        res.send('Invalid verify token');
-    }
-});
-
-function setupGetStartedButton(res){
-        var messageData = {
+    var messageData = {
                 "get_started":[
                 {
                     "payload":"USER_DEFINED_PAYLOAD"
@@ -49,7 +36,16 @@ function setupGetStartedButton(res){
                 res.send(body);
             }
         });
+});
+
+// Facebook Webhook
+app.get('/webhook', function (req, res) {
+    if (req.query['hub.verify_token'] === 'testbot_verify_token') {
+        res.send(req.query['hub.challenge']);
+    } else {
+        res.send('Invalid verify token');
     }
+});
 
 // // handler receiving messages
 // app.post('/webhook', function (req, res) {
