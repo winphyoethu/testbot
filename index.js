@@ -18,7 +18,7 @@ app.get('/', function (req, res) {
 
         // Start the request
         request({
-            url: 'https://graph.facebook.com/v2.6/me/messenger_profile?access_token='+ process.env.PAGE_ACCESS_TOKEN,
+            url: 'https://graph.facebook.com/v2.6/me/messenger_profile?access_token=EAAZAZCwz2xNCMBANQ4LQe81oM1LqmU9kFVxy5Qk16ZBfX5z5tKLUZCRAIeAxoaTMcH10ouqZC6bVQIZADZCdvjGOt3Ix0buJj7azrk9WowW4vQgZCa32IOoQvkDbZCYrUwT1popOWxAx59VPWwk1ffZAw2TwixAY6k3UIkINmg2hnqspqZBSc4IbrO8',
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             form: messageData
