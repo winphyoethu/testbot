@@ -9,32 +9,7 @@ app.listen((process.env.PORT || 3000));
 
 // Server frontpage
 app.get('/', function (req, res) {
-    var messageData = {
-                "get_started":[{
-                    "payload":"USER_DEFINED_PAYLOAD"
-                    }
-                ]
-        };
-
-        // Start the request
-        request({
-            url: 'https://graph.facebook.com/v2.6/me/messenger_profile?access_token=EAAZAZCwz2xNCMBANQ4LQe81oM1LqmU9kFVxy5Qk16ZBfX5z5tKLUZCRAIeAxoaTMcH10ouqZC6bVQIZADZCdvjGOt3Ix0buJj7azrk9WowW4vQgZCa32IOoQvkDbZCYrUwT1popOWxAx59VPWwk1ffZAw2TwixAY6k3UIkINmg2hnqspqZBSc4IbrO8',
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            form: messageData
-        },
-        function (error, response, body) {
-            if (!error && response.statusCode == 200) {
-                // Print out the response body
-                console.log("RESULT :: ", body)
-                res.send(body);
-                // res.send('This is TestBot Server');
-            } else { 
-                // TODO: Handle errors
-                console.log("RESULT ERR :: ",body)
-                res.send(body);
-            }
-        });
+    res.send('This is TestBot Server');
 });
 
 // Facebook Webhook
@@ -45,6 +20,38 @@ app.get('/webhook', function (req, res) {
         res.send('Invalid verify token');
     }
 });
+
+app.get('/setup', function(req, res){
+    setupGetStartedButton(res)
+});
+
+function setupGetStartedButton(res){
+        var messageData = {
+                "get_started":[
+                {
+                    "payload":"USER_DEFINED_PAYLOAD"
+                    }
+                ]
+        };
+
+        // Start the request
+        request({
+            url: 'https://graph.facebook.com/v2.6/me/messenger_profile?access_token=EAAZAZCwz2xNCMBAPBQz6Bd8Y99G3RSUHZBYJuJdxULV2E4DIfk37ZBkgMpDzyXGj1NnWWeHxHFgX7SEsGRTc65RxuZBZCIDLXidZCSC7BZCZAGwxspyY1jXHIcIv4jAHXgn6ZBArPyhoUOjqCDPIg5L3PrYyEXZApw8fW88Vj3ZBHNbEfA6ZBeznW1KSZA',
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            form: messageData
+        },
+        function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+                // Print out the response body
+                res.send(body);
+
+            } else { 
+                // TODO: Handle errors
+                res.send(body);
+            }
+        });
+    }  
 
 // // handler receiving messages
 // app.post('/webhook', function (req, res) {
