@@ -9,8 +9,6 @@ app.listen((process.env.PORT || 3000));
 
 // Server frontpage
 app.get('/', function (req, res) {
-    res.send('This is TestBot Server');
-
     var messageData = {
                 "get_started":[{
                     "payload":"USER_DEFINED_PAYLOAD"
@@ -30,6 +28,7 @@ app.get('/', function (req, res) {
                 // Print out the response body
                 console.log("RESULT :: ", body)
                 res.send(body);
+                // res.send('This is TestBot Server');
             } else { 
                 // TODO: Handle errors
                 console.log("RESULT ERR :: ",body)
