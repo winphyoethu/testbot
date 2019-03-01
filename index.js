@@ -55,7 +55,7 @@ function setupGetStartedButton(res){
 
 function getDataFromRgo() {
     return request({
-        url: 'http://13.250.4.112/rgo47/public/api/web-api/product/ATW108Y-0904',
+        url: 'http://13.250.4.112/rgo47/public/api/web-api/product/AST8N003169_AST8N003119',
         method: 'GET',
         headers: {
             'x-language' : 'en',
@@ -68,7 +68,7 @@ function getDataFromRgo() {
     function(error, response, body) {
         if(!error) {
             // res.send(body);
-            console.log("RGO47 1:: ", body)
+            // console.log("RGO47 1:: ", body)
             return body
         } else {
             // res.send(error);
@@ -128,9 +128,9 @@ function kittenMessage(recipientId, text) {
     text = text || "";
     var values = text.split(' ');
 
-    var result = getDataFromRgo()
+    var result = getDataFromRgo();
 
-    console.log("GGWP :: ", result)
+    console.log("RGO47 :: ", result);
 
     if (values.length === 3 && values[0] === 'kitten') {
         if (Number(values[1]) > 0 && Number(values[2]) > 0) {
@@ -167,10 +167,6 @@ function kittenMessage(recipientId, text) {
 function urlResponseMessage(recipientId, text) {
     var values = text.split(',');
 
-    var result = getDataFromRgo();
-
-    console.log("RES DATA :: ", result);
-
     if(values.length === 2) {
         var imageUrl = "https://d2jm25mmsa5fa0.cloudfront.net/public/uploads/products/2018/07/product_1532930733.jpg";
         var productUrl = "https://www.rgo47.com/product/"+values[1];
@@ -183,10 +179,10 @@ function urlResponseMessage(recipientId, text) {
                         "elements": [{
                             "title": "Rgo47",
                             "subtitle": "Men Clothings",
-                            "image_url": result.data.product_details.img_feature_url,
+                            "image_url": imageUrl ,
                             "default_action": {
                                 "type": "web_url",
-                                "url": result.data.product_details.img_feature_url,
+                                "url": imageUrl,
                                 "webview_height_ratio": "tall",
                             },
                             "buttons": [{
