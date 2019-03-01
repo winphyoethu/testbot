@@ -151,6 +151,11 @@ function urlResponseMessage(recipientId, text) {
                             "title": "Rgo47",
                             "subtitle": "Men Clothings",
                             "image_url": imageUrl ,
+                            "default_action": {
+                                "type": "web_url",
+                                "url": imageUrl,
+                                "webview_height_ratio": "tall",
+                            }
                             "buttons": [{
                                 "type": "web_url",
                                 "url": productUrl,
