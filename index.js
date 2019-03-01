@@ -72,7 +72,7 @@ function getDataFromRgo(res) {
             res.send(error);
         }
     });
-    res.sendStatus(200);
+    // res.sendStatus(200);
 }
 
 app.get('/getDataFromRgo', function(req, res){
