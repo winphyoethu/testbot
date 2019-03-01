@@ -53,7 +53,7 @@ function setupGetStartedButton(res){
     });
 }
 
-function getDataFromRgo(res) {
+function getDataFromRgo() {
     request({
         url: 'http://13.250.4.112/rgo47/public/api/web-api/product/AST8N003169_AST8N003119',
         method: 'GET',
@@ -67,16 +67,16 @@ function getDataFromRgo(res) {
     },
     function(error, response, body) {
         if(!error) {
-            res.send(body);
+            // res.send(body);
+            return body
         } else {
-            res.send(error);
+            // res.send(error);
         }
     });
-    // res.sendStatus(200);
 }
 
 app.get('/getDataFromRgo', function(req, res){
-    getDataFromRgo(res);
+    getDataFromRgo();
 });
 
 // handler receiving messages
@@ -91,7 +91,6 @@ app.post('/webhook', function (req, res) {
             }
         } else if (event.postback) {
             console.log("POSTBACK :: ",event.postback);
-            // sendMessage(event.sender.id, {text: "You opend through m.me link"});
             if(event.postback.referral) {
                 urlResponseMessage(event.sender.id, event.postback.referral.ref);
             } else {
@@ -99,7 +98,6 @@ app.post('/webhook', function (req, res) {
             }
         } else if(event.referral) {
             urlResponseMessage(event.sender.id, event.referral.ref)
-            // sendMessage(event.sender.id, event.postback.referral.ref);
         }
     }
     res.sendStatus(200);
@@ -128,6 +126,10 @@ function sendMessage(recipientId, message) {
 function kittenMessage(recipientId, text) {
     text = text || "";
     var values = text.split(' ');
+
+    var result = getDataFromRgo();
+
+    console.log("RGO47 :: ", result);
 
     if (values.length === 3 && values[0] === 'kitten') {
         if (Number(values[1]) > 0 && Number(values[2]) > 0) {
