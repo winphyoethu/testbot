@@ -131,6 +131,12 @@ function kittenMessage(recipientId, text) {
 
     var result = getDataFromRgo();
 
+    result(function(err, data) {
+    if (err) return next(err);
+        console.log(data);
+        // res.render("index", {randomNew: data});
+    });
+
     console.log("RGO47 :: ", result);
 
     if (values.length === 3 && values[0] === 'kitten') {
