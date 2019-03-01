@@ -55,7 +55,7 @@ function setupGetStartedButton(res){
 
 function getDataFromRgo(productSku) {
     return request({
-        url: 'http://13.250.4.112/rgo47/public/api/web-api/product/'+productSku,
+        url: 'http://13.250.4.112/rgo47/public/api/web-api/product/ATW108Y-0904',
         method: 'GET',
         headers: {
             'x-language' : 'en',
