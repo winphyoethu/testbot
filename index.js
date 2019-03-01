@@ -154,7 +154,8 @@ function urlResponseMessage(recipientId, text) {
                             "buttons": [{
                                 "type": "web_url",
                                 "url": productUrl,
-                                "title": "Show Products"
+                                "title": "Show Products",
+                                "webview_height_ratio": "compact"
                                 }, {
                                 "type": "postback",
                                 "title": "I like this",
