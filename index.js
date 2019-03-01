@@ -124,6 +124,8 @@ function sendMessage(recipientId, message) {
     });
 }
 
+var rgoData;
+
 // send rich message with kitten
 function kittenMessage(recipientId, text) {
     text = text || "";
@@ -145,13 +147,16 @@ function kittenMessage(recipientId, text) {
             if(!error) {
                 console.log("RGO47 1 :: ", body);
                 callback(null, body);
+                rgoData = body;
             } else {
                 // res.send(error);
             }
         });
     };
 
-    var rgoData = return getData(function(err, data) {
+    console.log("RGO47 1.5 :: ", rgoData);
+
+    var rgoData = getData(function(err, data) {
         if(err) return err;
         console.log("RGO47 2 :: ",data);
         return data;
