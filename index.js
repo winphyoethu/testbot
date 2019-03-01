@@ -34,7 +34,6 @@ function setupGetStartedButton(res){
                     "payload":"USER_DEFINED_PAYLOAD"
                 }
         };
-
         // Start the request
         request({
             url: 'https://graph.facebook.com/v2.6/me/messenger_profile?access_token=EAAZAZCwz2xNCMBAPBQz6Bd8Y99G3RSUHZBYJuJdxULV2E4DIfk37ZBkgMpDzyXGj1NnWWeHxHFgX7SEsGRTc65RxuZBZCIDLXidZCSC7BZCZAGwxspyY1jXHIcIv4jAHXgn6ZBArPyhoUOjqCDPIg5L3PrYyEXZApw8fW88Vj3ZBHNbEfA6ZBeznW1KSZA',
@@ -45,14 +44,14 @@ function setupGetStartedButton(res){
         function (error, response, body) {
             if (!error && response.statusCode == 200) {
                 // Print out the response body
+                console.log("RESPONSE :: ", response)
                 res.send(body);
-
             } else { 
                 // TODO: Handle errors
                 res.send(body);
             }
         });
-    }  
+}
 
 // // handler receiving messages
 // app.post('/webhook', function (req, res) {
