@@ -26,32 +26,56 @@ app.get('/setup', function(req, res){
 });
 
 function setupGetStartedButton(res){
-        var messageData = {
-            "setting-type":"call_to_actions",
-            "thread_state":"new_thread",
-            "get_started":
-                {
-                    "payload":"USER_DEFINED_PAYLOAD"
-                }
-        };
-        // Start the request
-        request({
-            url: 'https://graph.facebook.com/v2.6/me/messenger_profile?access_token=EAAZAZCwz2xNCMBAPBQz6Bd8Y99G3RSUHZBYJuJdxULV2E4DIfk37ZBkgMpDzyXGj1NnWWeHxHFgX7SEsGRTc65RxuZBZCIDLXidZCSC7BZCZAGwxspyY1jXHIcIv4jAHXgn6ZBArPyhoUOjqCDPIg5L3PrYyEXZApw8fW88Vj3ZBHNbEfA6ZBeznW1KSZA',
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            form: messageData
-        },
-        function (error, response, body) {
-            if (!error && response.statusCode == 200) {
-                // Print out the response body
-                console.log("RESPONSE :: ", response)
-                res.send(body);
-            } else { 
-                // TODO: Handle errors
-                res.send(body);
+    var messageData = {
+        "setting-type":"call_to_actions",
+        "thread_state":"new_thread",
+        "get_started":
+            {
+                "payload":"USER_DEFINED_PAYLOAD"
             }
-        });
+    };
+    // Start the request
+    request({
+        url: 'https://graph.facebook.com/v2.6/me/messenger_profile?access_token=EAAZAZCwz2xNCMBAPBQz6Bd8Y99G3RSUHZBYJuJdxULV2E4DIfk37ZBkgMpDzyXGj1NnWWeHxHFgX7SEsGRTc65RxuZBZCIDLXidZCSC7BZCZAGwxspyY1jXHIcIv4jAHXgn6ZBArPyhoUOjqCDPIg5L3PrYyEXZApw8fW88Vj3ZBHNbEfA6ZBeznW1KSZA',
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        form: messageData
+    },
+    function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+            // Print out the response body
+            console.log("RESPONSE :: ", response)
+            res.send(body);
+        } else { 
+            // TODO: Handle errors
+            res.send(body);
+        }
+    });
 }
+
+function getDataFromRgo(res) {
+    request({
+        url: 'http://13.250.4.112/rgo47/public/api/web-api/product/AST8N003169_AST8N003119',
+        method: 'GET',
+        headers: {
+            'x-language' : 'en',
+            "x-api-secret-key" : "7KG2D00LQrG1tKlTruzbujKCGVME0M3aOHN0yhsdEUNyLE6NVhS",
+            "x-device-id" :"1234567",
+            "x-app-version" : "1.1.1",
+            "x-user-id" : "83596"
+        },
+    },
+    function(error, response, body)) {
+        if(!error) {
+            res.send(body);
+        }
+    });
+    res.sendStatus(200);
+}
+
+app.get('/getDataFromRgo', function(req, res){
+    getDataFromRgo(res);
+});
 
 // handler receiving messages
 app.post('/webhook', function (req, res) {
