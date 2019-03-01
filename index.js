@@ -96,7 +96,8 @@ app.post('/webhook', function (req, res) {
                 sendMessage(event.sender.id, {text: "Echo: " + event.message.text});
             }
         } else if (event.postback) {
-            console.log("Postback received: " + JSON.stringify(event.postback));
+            sendMessage(event.sender.id,event.postback.referral.ref)
+            // console.log("Postback received: " + JSON.stringify(event.postback));
         }
     }
     res.sendStatus(200);
