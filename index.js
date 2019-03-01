@@ -53,9 +53,9 @@ function setupGetStartedButton(res){
     });
 }
 
-function getDataFromRgo() {
+function getDataFromRgo(productSku) {
     return request({
-        url: 'http://13.250.4.112/rgo47/public/api/web-api/product/AST8N003169_AST8N003119',
+        url: 'http://13.250.4.112/rgo47/public/api/web-api/product/'+productSku,
         method: 'GET',
         headers: {
             'x-language' : 'en',
@@ -128,10 +128,6 @@ function kittenMessage(recipientId, text) {
     text = text || "";
     var values = text.split(' ');
 
-    var result = getDataFromRgo();
-
-    console.log("RGO47 :: ", result);
-
     if (values.length === 3 && values[0] === 'kitten') {
         if (Number(values[1]) > 0 && Number(values[2]) > 0) {
             var imageUrl = "https://placekitten.com/" + Number(values[1]) + "/" + Number(values[2]);
@@ -167,6 +163,8 @@ function kittenMessage(recipientId, text) {
 function urlResponseMessage(recipientId, text) {
     var values = text.split(',');
 
+    var result = getDataFromRgo(values[1]);
+
     if(values.length === 2) {
         var imageUrl = "https://d2jm25mmsa5fa0.cloudfront.net/public/uploads/products/2018/07/product_1532930733.jpg";
         var productUrl = "https://www.rgo47.com/product/"+values[1];
@@ -179,10 +177,10 @@ function urlResponseMessage(recipientId, text) {
                         "elements": [{
                             "title": "Rgo47",
                             "subtitle": "Men Clothings",
-                            "image_url": imageUrl ,
+                            "image_url": result.data.product_details.img_feature_url,
                             "default_action": {
                                 "type": "web_url",
-                                "url": imageUrl,
+                                "url": result.data.product_details.img_feature_url,
                                 "webview_height_ratio": "tall",
                             },
                             "buttons": [{
