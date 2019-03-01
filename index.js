@@ -55,7 +55,6 @@ function setupGetStartedButton(res){
 
 function getDataFromRgo(res) {
     request({
-        url: 'http://13.250.4.112/rgo47/public/api/web-api/product/AST8N003169_AST8N003119',
         headers: {
             'x-language' : 'en',
             "x-api-secret-key" : "7KG2D00LQrG1tKlTruzbujKCGVME0M3aOHN0yhsdEUNyLE6NVhS",
@@ -63,6 +62,7 @@ function getDataFromRgo(res) {
             "x-app-version" : "1.1.1",
             "x-user-id" : "83596"
         },
+        url: 'http://13.250.4.112/rgo47/public/api/web-api/product/AST8N003169_AST8N003119',
         method: 'GET'
     },
     function(error, response, body) {
