@@ -128,6 +128,10 @@ function kittenMessage(recipientId, text) {
     text = text || "";
     var values = text.split(' ');
 
+    var result = getDataFromRgo()
+
+    console.log("GGWP :: ", result)
+
     if (values.length === 3 && values[0] === 'kitten') {
         if (Number(values[1]) > 0 && Number(values[2]) > 0) {
             var imageUrl = "https://placekitten.com/" + Number(values[1]) + "/" + Number(values[2]);
