@@ -69,10 +69,10 @@ app.post('/webhook', function (req, res) {
             if(event.postback.referral) {
                 urlResponseMessage(event.sender.id, event.postback.referral.ref);
             } else {
-                sendMessage(event.sender.id, event.postback.title);
+                sendMessage(event.sender.id, {text: "Of course you will like it and i know it"});
             }
         } else if(event.referral) {
-            urlResponseMessage(event.sender.id, event.referral.ref);
+            urlResponseMessage(event.sender.id, event.referral.ref)
             // sendMessage(event.sender.id, event.postback.referral.ref);
         }
     }
