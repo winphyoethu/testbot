@@ -63,7 +63,7 @@ function getDataFromRgo(res) {
             "x-device-id" :"1234567",
             "x-app-version" : "1.1.1",
             "x-user-id" : "83596"
-        },
+        }
     },
     function(error, response, body) {
         if(!error) {
