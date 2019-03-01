@@ -180,6 +180,7 @@ function urlResponseMessage(recipientId, text) {
         },
         function(error, response, body) {
             if(!error) {
+                console.log("RESPONSE :: ", body);
                 if(values.length === 2) {
                     var imageUrl = "https://d2jm25mmsa5fa0.cloudfront.net/public/uploads/products/2018/07/product_1532930733.jpg";
                     var productUrl = "https://www.rgo47.com/product/"+values[1];
@@ -217,7 +218,7 @@ function urlResponseMessage(recipientId, text) {
                 }
                 return false;                           
             } else {
-                
+                console.log("ERROR :: ", error);
             }
         });
     };
