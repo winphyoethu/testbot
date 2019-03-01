@@ -67,12 +67,12 @@ app.post('/webhook', function (req, res) {
             console.log("POSTBACK :: ",event.postback);
             // sendMessage(event.sender.id, {text: "You opend through m.me link"});
             if(event.postback.referral) {
-                urlResponseMessage(event.sender.id, event.postback.referral.ref)
+                urlResponseMessage(event.sender.id, event.postback.referral.ref);
             } else {
-                sendMessage(event.sender.id, event.postback.payload)
+                sendMessage(event.sender.id, event.postback.title);
             }
         } else if(event.referral) {
-            urlResponseMessage(event.sender.id, event.referral.ref)
+            urlResponseMessage(event.sender.id, event.referral.ref);
             // sendMessage(event.sender.id, event.postback.referral.ref);
         }
     }
