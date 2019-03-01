@@ -143,19 +143,19 @@ function kittenMessage(recipientId, text) {
         },
         function(error, response, body) {
             if(!error) {
-                callback(null, body)
+                callback(null, body);
             } else {
                 // res.send(error);
             }
         });
     };
 
-    var data = result(function(err, data) {
+    var data1 = result(function(err, data) {
         if(err) return err;
         return data;
     });
 
-    console.log("RGO47 :: ", data);
+    console.log("RGO47 :: ", data1);
 
     if (values.length === 3 && values[0] === 'kitten') {
         if (Number(values[1]) > 0 && Number(values[2]) > 0) {
