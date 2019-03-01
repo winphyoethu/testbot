@@ -129,12 +129,33 @@ function kittenMessage(recipientId, text) {
     text = text || "";
     var values = text.split(' ');
 
-    var result = getDataFromRgo();
+    var result = function(callback) {
+        request({
+            url: 'http://13.250.4.112/rgo47/public/api/web-api/product/AST8N003169_AST8N003119',
+            method: 'GET',
+            headers: {
+                'x-language' : 'en',
+                'x-api-secret-key' : '7KG2D00LQrG1tKlTruzbujKCGVME0M3aOHN0yhsdEUNyLE6NVhS',
+                'x-device-id' :'1234567',
+                'x-app-version' : '1.1.1',
+                'x-user-id' : '83596'
+            }
+        },
+        function(error, response, body) {
+            if(!error) {
+                // res.send(body);
+                // console.log("RGO47 1 :: ", body)
+                // return body
+                callback(body)
+            } else {
+                // res.send(error);
+            }
+        });
+    };
 
-    result(function(err, data) {
-    if (err) return next(err);
-        console.log(data);
-        // res.render("index", {randomNew: data});
+    var data = result(function(err, data) {
+        if(err) return err;
+        return data;
     });
 
     console.log("RGO47 :: ", result);
