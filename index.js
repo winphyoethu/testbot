@@ -140,7 +140,7 @@ function urlResponseMessage(recipientId, text) {
 
     if(values.length === 2) {
         var imageUrl = "https://d2jm25mmsa5fa0.cloudfront.net/public/uploads/products/2018/07/product_1532930733.jpg";
-        var productUrl = "https://www.rgo47.com/product/brand/0/s/"+values[0]+"/"+values[1];
+        var productUrl = "https://www.rgo47.com/product/"+values[1];
 
         message = {
             "attachment": {
