@@ -197,10 +197,10 @@ function urlResponseMessage(recipientId, text) {
                                 "elements": [{
                                     "title": "Rgo47",
                                     "subtitle": "Men Clothings",
-                                    "image_url": body.data.product_details.img_feature_url,
+                                    "image_url": jsonData.data.product_details.img_feature_url,
                                     "default_action": {
                                         "type": "web_url",
-                                        "url": body.data.product_details.img_feature_url,
+                                        "url": jsonData.data.product_details.img_feature_url,
                                         "webview_height_ratio": "tall",
                                     },
                                     "buttons": [{
