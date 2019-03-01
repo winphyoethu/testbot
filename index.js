@@ -104,6 +104,8 @@ app.post('/webhook', function (req, res) {
             //     sendMessage(event.sender.id, {text: "You opend through m.me link"});
             // }
             // console.log("Postback received: " + JSON.stringify(event.postback));
+        } else if(event.referral) {
+            sendMessage(event.sender.id, {text: "You opend through m.me link"});
         }
     }
     res.sendStatus(200);
