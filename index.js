@@ -53,38 +53,6 @@ function setupGetStartedButton(res){
         });
 }
 
-// // handler receiving messages
-// app.post('/webhook', function (req, res) {
-//     var events = req.body.entry[0].messaging;
-//     for (i = 0; i < events.length; i++) {
-//         var event = events[i];
-//         if (event.message && event.message.text) {
-//             sendMessage(event.sender.id, {text: "Echo: " + event.message.text});
-//         }
-//     }
-//     res.sendStatus(200);
-// });
-//
-//
-// // generic function sending messages
-// function sendMessage(recipientId, message) {
-//     request({
-//         url: 'https://graph.facebook.com/v2.6/me/messages',
-//         qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
-//         method: 'POST',
-//         json: {
-//             recipient: {id: recipientId},
-//             message: message,
-//         }
-//     }, function(error, response, body) {
-//         if (error) {
-//             console.log('Error sending message: ', error);
-//         } else if (response.body.error) {
-//             console.log('Error: ', response.body.error);
-//         }
-//     });
-// }
-
 // handler receiving messages
 app.post('/webhook', function (req, res) {
     var events = req.body.entry[0].messaging;
@@ -97,15 +65,14 @@ app.post('/webhook', function (req, res) {
             }
         } else if (event.postback) {
             console.log("POSTBACK :: ",event.postback);
-            sendMessage(event.sender.id, {text: "You opend through m.me link"});
-            // if(event.postback.referral.ref) {
-                
-            // } else {
-            //     sendMessage(event.sender.id, {text: "You opend through m.me link"});
-            // }
-            // console.log("Postback received: " + JSON.stringify(event.postback));
+            // sendMessage(event.sender.id, {text: "You opend through m.me link"});
+            if(event.postback.referral) {
+                urlResponseMessage(event.sender.id, event.postback.referral.ref)
+            } else {
+                sendMessage(event.sender.id, event.postback.payload)
+            }
         } else if(event.referral) {
-            sendMessage(event.sender.id, {text: "You opend through m.me link"});
+            sendMessage(event.sender.id, event.postback.referral.ref);
         }
     }
     res.sendStatus(200);
@@ -132,15 +99,12 @@ function sendMessage(recipientId, message) {
 
 // send rich message with kitten
 function kittenMessage(recipientId, text) {
-
     text = text || "";
     var values = text.split(' ');
 
     if (values.length === 3 && values[0] === 'kitten') {
         if (Number(values[1]) > 0 && Number(values[2]) > 0) {
-
             var imageUrl = "https://placekitten.com/" + Number(values[1]) + "/" + Number(values[2]);
-
             message = {
                 "attachment": {
                     "type": "template",
@@ -163,13 +127,44 @@ function kittenMessage(recipientId, text) {
                     }
                 }
             };
-
             sendMessage(recipientId, message);
-
             return true;
         }
     }
-
     return false;
+}
 
+function urlResponseMessage(recipientId, text) {
+    var values = text.split(',');
+
+    if(values.length === 2) {
+        var imageUrl = "https://d2jm25mmsa5fa0.cloudfront.net/public/uploads/products/2018/07/product_1532930733.jpg";
+        var productUrl = "https://www.rgo47.com/product/brand/0/s/"+values[0]+"/"+values[1]
+
+        message = {
+            "attachment": {
+                "type": "template",
+                "payload": {
+                    "template_type": "generic",
+                        "elements": [{
+                            "title": "Rgo47",
+                            "subtitle": "Men Clothings",
+                            "image_url": imageUrl ,
+                            "buttons": [{
+                                "type": "web_url",
+                                "url": productUrl,
+                                "title": "Show Products"
+                                }, {
+                                "type": "postback",
+                                "title": "I like this",
+                                "payload": "User " + recipientId + " likes kitten " + imageUrl,
+                            }]
+                        }]
+                }
+            }
+        };
+        sendMessage(recipientId, message);
+        return true;
+    }
+    return false;
 }
