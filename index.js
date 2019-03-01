@@ -54,7 +54,7 @@ function setupGetStartedButton(res){
 }
 
 function getDataFromRgo() {
-    request({
+    return request({
         url: 'http://13.250.4.112/rgo47/public/api/web-api/product/AST8N003169_AST8N003119',
         method: 'GET',
         headers: {
@@ -69,7 +69,7 @@ function getDataFromRgo() {
         if(!error) {
             // res.send(body);
             // console.log("RGO47 1:: ", body)
-            return callback(body)
+            return body
         } else {
             // res.send(error);
         }
