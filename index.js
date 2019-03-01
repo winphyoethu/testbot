@@ -183,6 +183,10 @@ function urlResponseMessage(recipientId, text) {
             if(values.length === 2) {
                 var productUrl = "https://www.rgo47.com/product/"+values[1];
 
+                console.log("RESPONSE :: ", body.response);
+                console.log("META :: ", body.meta);
+                console.log("DATA :: ", body.data);
+
                 message = {
                     "attachment": {
                         "type": "template",
