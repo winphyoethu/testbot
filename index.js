@@ -96,10 +96,11 @@ app.post('/webhook', function (req, res) {
                 sendMessage(event.sender.id, {text: "Echo: " + event.message.text});
             }
         } else if (event.postback) {
+            console.log("POSTBACK :: ",event.postback);
             if(event.postback.referral.ref) {
-                sendMessage(event.sender.id,event.postback.referral.ref);
+                sendMessage(event.sender.id, event.postback.referral.ref);
             } else {
-                sendMessage(event.sender.idevent.postback.title);
+                sendMessage(event.sender. idevent.postback.title);
             }
             // console.log("Postback received: " + JSON.stringify(event.postback));
         }
