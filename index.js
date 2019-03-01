@@ -151,7 +151,7 @@ function kittenMessage(recipientId, text) {
         });
     };
 
-    var rgoData = getData(function(err, data) {
+    var rgoData = return getData(function(err, data) {
         if(err) return err;
         console.log("RGO47 2 :: ",data);
         return data;
