@@ -165,6 +165,8 @@ function urlResponseMessage(recipientId, text) {
 
     var result = getDataFromRgo(values[1]);
 
+    console.log("RES DATA :: ", result);
+
     if(values.length === 2) {
         var imageUrl = "https://d2jm25mmsa5fa0.cloudfront.net/public/uploads/products/2018/07/product_1532930733.jpg";
         var productUrl = "https://www.rgo47.com/product/"+values[1];
