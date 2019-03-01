@@ -72,7 +72,8 @@ app.post('/webhook', function (req, res) {
                 sendMessage(event.sender.id, event.postback.payload)
             }
         } else if(event.referral) {
-            sendMessage(event.sender.id, event.postback.referral.ref);
+            urlResponseMessage(event.sender.id, event.referral.ref)
+            // sendMessage(event.sender.id, event.postback.referral.ref);
         }
     }
     res.sendStatus(200);
