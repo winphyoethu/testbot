@@ -129,7 +129,7 @@ function kittenMessage(recipientId, text) {
     text = text || "";
     var values = text.split(' ');
 
-    var result = function(callback) {
+    var getData = function(callback) {
         request({
             url: 'http://13.250.4.112/rgo47/public/api/web-api/product/AST8N003169_AST8N003119',
             method: 'GET',
@@ -143,6 +143,7 @@ function kittenMessage(recipientId, text) {
         },
         function(error, response, body) {
             if(!error) {
+                console.log("RGO47 1 :: ", body);
                 callback(null, body);
             } else {
                 // res.send(error);
@@ -150,12 +151,12 @@ function kittenMessage(recipientId, text) {
         });
     };
 
-    var data1 = result(function(err, data) {
+    var rgoData = getData(function(err, data) {
         if(err) return err;
         return data;
     });
 
-    console.log("RGO47 :: ", data1);
+    console.log("RGO47 :: ", rgoData);
 
     if (values.length === 3 && values[0] === 'kitten') {
         if (Number(values[1]) > 0 && Number(values[2]) > 0) {
