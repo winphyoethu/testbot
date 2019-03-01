@@ -68,8 +68,8 @@ function getDataFromRgo() {
     function(error, response, body) {
         if(!error) {
             // res.send(body);
-            console.log("RGO47 1:: ", body)
-            return body
+            // console.log("RGO47 1:: ", body)
+            return callback(body)
         } else {
             // res.send(error);
         }
