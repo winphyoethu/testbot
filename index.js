@@ -65,7 +65,7 @@ function getDataFromRgo(res) {
             "x-user-id" : "83596"
         },
     },
-    function(error, response, body)) {
+    function(error, response, body){
         if(!error) {
             res.send(body);
         }
