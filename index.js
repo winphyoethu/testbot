@@ -158,7 +158,7 @@ function kittenMessage(recipientId, text) {
         return data;
     });
 
-    console.log("RGO47 :: ", result);
+    console.log("RGO47 :: ", data);
 
     if (values.length === 3 && values[0] === 'kitten') {
         if (Number(values[1]) > 0 && Number(values[2]) > 0) {
