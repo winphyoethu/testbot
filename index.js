@@ -143,10 +143,7 @@ function kittenMessage(recipientId, text) {
         },
         function(error, response, body) {
             if(!error) {
-                // res.send(body);
-                // console.log("RGO47 1 :: ", body)
-                // return body
-                callback(body)
+                callback(null, body)
             } else {
                 // res.send(error);
             }
