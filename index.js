@@ -53,7 +53,7 @@ function setupGetStartedButton(res){
     });
 }
 
-function getDataFromRgo(productSku) {
+function getDataFromRgo() {
     return request({
         url: 'http://13.250.4.112/rgo47/public/api/web-api/product/ATW108Y-0904',
         method: 'GET',
@@ -163,7 +163,7 @@ function kittenMessage(recipientId, text) {
 function urlResponseMessage(recipientId, text) {
     var values = text.split(',');
 
-    var result = getDataFromRgo(values[1]);
+    var result = getDataFromRgo();
 
     console.log("RES DATA :: ", result);
 
