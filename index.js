@@ -131,39 +131,6 @@ function kittenMessage(recipientId, text) {
     text = text || "";
     var values = text.split(' ');
 
-    var getData = function(callback) {
-        request({
-            url: 'http://13.250.4.112/rgo47/public/api/web-api/product/AST8N003169_AST8N003119',
-            method: 'GET',
-            headers: {
-                'x-language' : 'en',
-                'x-api-secret-key' : '7KG2D00LQrG1tKlTruzbujKCGVME0M3aOHN0yhsdEUNyLE6NVhS',
-                'x-device-id' :'1234567',
-                'x-app-version' : '1.1.1',
-                'x-user-id' : '83596'
-            }
-        },
-        function(error, response, body) {
-            if(!error) {
-                console.log("RGO47 1 :: ", body);
-                callback(null, body);
-                rgoData = body;
-            } else {
-                // res.send(error);
-            }
-        });
-    };
-
-    console.log("RGO47 1.5 :: ", rgoData);
-
-    var rgoData = getData(function(err, data) {
-        if(err) return err;
-        console.log("RGO47 2 :: ",data);
-        return data;
-    });
-
-    console.log("RGO47 :: ", rgoData);
-
     if (values.length === 3 && values[0] === 'kitten') {
         if (Number(values[1]) > 0 && Number(values[2]) > 0) {
             var imageUrl = "https://placekitten.com/" + Number(values[1]) + "/" + Number(values[2]);
@@ -199,40 +166,60 @@ function kittenMessage(recipientId, text) {
 function urlResponseMessage(recipientId, text) {
     var values = text.split(',');
 
-    if(values.length === 2) {
-        var imageUrl = "https://d2jm25mmsa5fa0.cloudfront.net/public/uploads/products/2018/07/product_1532930733.jpg";
-        var productUrl = "https://www.rgo47.com/product/"+values[1];
-
-        message = {
-            "attachment": {
-                "type": "template",
-                "payload": {
-                    "template_type": "generic",
-                        "elements": [{
-                            "title": "Rgo47",
-                            "subtitle": "Men Clothings",
-                            "image_url": imageUrl ,
-                            "default_action": {
-                                "type": "web_url",
-                                "url": imageUrl,
-                                "webview_height_ratio": "tall",
-                            },
-                            "buttons": [{
-                                "type": "web_url",
-                                "url": productUrl,
-                                "title": "Show Products",
-                                "webview_height_ratio": "tall"
-                                }, {
-                                "type": "postback",
-                                "title": "I like this",
-                                "payload": "User " + recipientId + " likes kitten " + imageUrl,
-                            }]
-                        }]
-                }
+    var getData = function(callback) {
+        request({
+            url: 'http://13.250.4.112/rgo47/public/api/web-api/product/AST8N003169_AST8N003119',
+            method: 'GET',
+            headers: {
+                'x-language' : 'en',
+                'x-api-secret-key' : '7KG2D00LQrG1tKlTruzbujKCGVME0M3aOHN0yhsdEUNyLE6NVhS',
+                'x-device-id' :'1234567',
+                'x-app-version' : '1.1.1',
+                'x-user-id' : '83596'
             }
-        };
-        sendMessage(recipientId, message);
-        return true;
-    }
-    return false;
+        },
+        function(error, response, body) {
+            if(!error) {
+                if(values.length === 2) {
+                    var imageUrl = "https://d2jm25mmsa5fa0.cloudfront.net/public/uploads/products/2018/07/product_1532930733.jpg";
+                    var productUrl = "https://www.rgo47.com/product/"+values[1];
+
+                    message = {
+                        "attachment": {
+                            "type": "template",
+                            "payload": {
+                                "template_type": "generic",
+                                    "elements": [{
+                                        "title": "Rgo47",
+                                        "subtitle": "Men Clothings",
+                                        "image_url": imageUrl ,
+                                        "default_action": {
+                                            "type": "web_url",
+                                            "url": imageUrl,
+                                            "webview_height_ratio": "tall",
+                                        },
+                                        "buttons": [{
+                                            "type": "web_url",
+                                            "url": productUrl,
+                                            "title": "Show Products",
+                                            "webview_height_ratio": "tall"
+                                            }, {
+                                            "type": "postback",
+                                            "title": "I like this",
+                                            "payload": "User " + recipientId + " likes kitten " + imageUrl,
+                                        }]
+                                    }]
+                            }
+                        }
+                    };
+                    sendMessage(recipientId, message);
+                    return true;
+                }
+                return false;                           
+            } else {
+                
+            }
+        });
+    };
+
 }
