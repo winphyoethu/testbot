@@ -155,7 +155,7 @@ function urlResponseMessage(recipientId, text) {
                                 "type": "web_url",
                                 "url": imageUrl,
                                 "webview_height_ratio": "tall",
-                            }
+                            },
                             "buttons": [{
                                 "type": "web_url",
                                 "url": productUrl,
