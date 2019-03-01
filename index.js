@@ -167,7 +167,7 @@ function urlResponseMessage(recipientId, text) {
     var values = text.split(',');
 
     request({
-        url: 'http://13.250.4.112/rgo47/public/api/web-api/product/AST8N003169_AST8N003119',
+        url: 'http://13.250.4.112/rgo47/public/api/web-api/product/'+values[1],
         method: 'GET',
         headers: {
             'x-language' : 'en',
@@ -181,7 +181,6 @@ function urlResponseMessage(recipientId, text) {
         if(!error) {
             console.log("RESPONSE :: ", body);
             if(values.length === 2) {
-                var imageUrl = "https://d2jm25mmsa5fa0.cloudfront.net/public/uploads/products/2018/07/product_1532930733.jpg";
                 var productUrl = "https://www.rgo47.com/product/"+values[1];
 
                 message = {
@@ -192,10 +191,10 @@ function urlResponseMessage(recipientId, text) {
                                 "elements": [{
                                     "title": "Rgo47",
                                     "subtitle": "Men Clothings",
-                                    "image_url": imageUrl ,
+                                    "image_url": body.data.product_details.img_feature_url,
                                     "default_action": {
                                         "type": "web_url",
-                                        "url": imageUrl,
+                                        "url": body.data.product_details.img_feature_url,
                                         "webview_height_ratio": "tall",
                                     },
                                     "buttons": [{
@@ -206,7 +205,7 @@ function urlResponseMessage(recipientId, text) {
                                         }, {
                                         "type": "postback",
                                         "title": "I like this",
-                                        "payload": "User " + recipientId + " likes kitten " + imageUrl,
+                                        "payload": "User " + recipientId + " likes kitten ",
                                     }]
                                 }]
                         }
