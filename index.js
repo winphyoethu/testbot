@@ -29,10 +29,11 @@ function setupGetStartedButton(res){
     var messageData = {
         "setting_type":"call_to_actions",
         "thread_state":"new_thread",
-        "get_started":
+        "call_to_actions":[
             {
                 "payload":"USER_DEFINED_PAYLOAD"
             }
+            ]
     };
     // Start the request
     request({
