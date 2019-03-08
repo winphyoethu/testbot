@@ -27,7 +27,7 @@ app.get('/setup', function(req, res){
 
 function setupGetStartedButton(res){
     var messageData = {
-        "setting-type":"call_to_actions",
+        "setting_type":"call_to_actions",
         "thread_state":"new_thread",
         "get_started":
             {
