@@ -87,7 +87,7 @@ app.post('/webhook', function (req, res) {
                           }
                         ]
                     };
-                    sendMessage(event.sender.id, {text: "Echo: " + event.message.text});
+                    sendMessage(event.sender.id, quickReplyMessage);
                 } else {
                     sendMessage(event.sender.id, {text: "Echo: " + event.message.text});
                 }
