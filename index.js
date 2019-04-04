@@ -224,9 +224,15 @@ function urlResponseMessage(recipientId, text) {
                                         "title": "Show Products",
                                         "webview_height_ratio": "tall"
                                         }, {
-                                        "type": "postback",
-                                        "title": "I like this",
-                                        "payload": "User " + recipientId + " likes kitten ",
+                                        "type": "element_share",
+                                        "share_contents": { 
+                                            "attachment": {
+                                            "type": "template",
+                                            "payload": {
+                                                    
+                                                }
+                                            }
+                                        }
                                     }]
                                 }]
                         }
