@@ -229,7 +229,17 @@ function urlResponseMessage(recipientId, text) {
                                             "attachment": {
                                             "type": "template",
                                             "payload": {
-                                                    
+                                                    "template_type" : "generic",
+                                                    "elements": [{
+                                                        "title": "Rgo47",
+                                                        "subtitle": jsonData.data.name,
+                                                        "image_url": jsonData.data.feature_image,
+                                                        "default_action": {
+                                                            "type": "web_url",
+                                                            "url": jsonData.data.feature_image,
+                                                            "webview_height_ratio": "tall",
+                                                        }
+                                                    }]
                                                 }
                                             }
                                         }
