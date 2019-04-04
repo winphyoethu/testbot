@@ -178,11 +178,11 @@ function urlResponseMessage(recipientId, text) {
                             "template_type": "generic",
                                 "elements": [{
                                     "title": "Rgo47",
-                                    "subtitle": jsonData.data.product_details.product_detail.name,
-                                    "image_url": jsonData.data.product_details.img_feature_url,
+                                    "subtitle": jsonData.data.name,
+                                    "image_url": jsonData.data.feature_image,
                                     "default_action": {
                                         "type": "web_url",
-                                        "url": jsonData.data.product_details.img_feature_url,
+                                        "url": jsonData.data.feature_image,
                                         "webview_height_ratio": "tall",
                                     },
                                     "buttons": [{
