@@ -238,7 +238,13 @@ function urlResponseMessage(recipientId, text) {
                                                             "type": "web_url",
                                                             "url": jsonData.data.feature_image,
                                                             "webview_height_ratio": "tall",
-                                                        }
+                                                        },
+                                                        "buttons" : [{
+                                                            "type": "web_url",
+                                                            "url": productUrl,
+                                                            "title": "Show Products",
+                                                            "webview_height_ratio": "tall"
+                                                        }]
                                                     }]
                                                 }
                                             }
