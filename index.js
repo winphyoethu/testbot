@@ -72,22 +72,28 @@ app.post('/webhook', function (req, res) {
         if (event.message && event.message.text) {
             if (!kittenMessage(event.sender.id, event.message.text)) {
                 if(event.message.text.toLowerCase().includes("buy")) {
-                    var quickReplyMessage = {
-                        "text" : "Quick Buy",
-                        "quick_replies":[
-                          {
-                            "content_type":"text",
-                            "title":"Buy",
-                            "payload":"",
-                          },
-                          {
-                            "content_type":"text",
-                            "title":"Cancel",
-                            "payload":"",
-                          }
-                        ]
-                    };
-                    sendMessage(event.sender.id, quickReplyMessage);
+                    request({
+                        url: 'https://graph.facebook.com/v2.9/'+event.sender.id,
+                                method: 'GET'
+                    },function(error, response, body) {
+                        console.log("PROFILE :: ", body)
+                    });
+                    // var quickReplyMessage = {
+                    //     "text" : "Quick Buy",
+                    //     "quick_replies":[
+                    //       {
+                    //         "content_type":"text",
+                    //         "title":"Buy",
+                    //         "payload":"",
+                    //       },
+                    //       {
+                    //         "content_type":"text",
+                    //         "title":"Cancel",
+                    //         "payload":"",
+                    //       }
+                    //     ]
+                    // };
+                    // sendMessage(event.sender.id, quickReplyMessage);
                 } else {
                     sendMessage(event.sender.id, {text: "Echo: " + event.message.text});
                 }
