@@ -200,6 +200,7 @@ function urlResponseMessage(recipientId, text) {
                     }
                 };
                 sendMessage(recipientId, message);
+                sendMessage(recipientId, {text: "Customer service will reach you soon. Thank you for your interest"});
                 return true;
             }
             return false;                           
