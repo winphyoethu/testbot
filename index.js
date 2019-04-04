@@ -77,23 +77,26 @@ app.post('/webhook', function (req, res) {
                                 method: 'GET'
                     },function(error, response, body) {
                         console.log("PROFILE :: ", body)
+
+                        var userProfileJson = JSON.parse(body)
+
+                        var quickReplyMessage = {
+                            "text" : userProfileJson.first_name+" "+userProfileJson.last_name+", please choose option to buy",
+                            "quick_replies":[
+                              {
+                                "content_type":"text",
+                                "title":"Buy",
+                                "payload":"",
+                              },
+                              {
+                                "content_type":"text",
+                                "title":"Cancel",
+                                "payload":"",
+                              }
+                            ]
+                        };
+                        sendMessage(event.sender.id, quickReplyMessage);
                     });
-                    // var quickReplyMessage = {
-                    //     "text" : "Quick Buy",
-                    //     "quick_replies":[
-                    //       {
-                    //         "content_type":"text",
-                    //         "title":"Buy",
-                    //         "payload":"",
-                    //       },
-                    //       {
-                    //         "content_type":"text",
-                    //         "title":"Cancel",
-                    //         "payload":"",
-                    //       }
-                    //     ]
-                    // };
-                    // sendMessage(event.sender.id, quickReplyMessage);
                 } else {
                     sendMessage(event.sender.id, {text: "Echo: " + event.message.text});
                 }
