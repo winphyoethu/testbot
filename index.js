@@ -162,8 +162,8 @@ function urlResponseMessage(recipientId, text) {
     function(error, response, body) {
         if(!error) {
             console.log("RESPONSE :: ", body);
-            if(values.length === 2) {
-                var productUrl = "https://www.rgo47.com/product/"+values[1];
+            if(values.length === 3) {
+                var productUrl = "https://www.rgo47.com/product/"+values[2];
 
                 var jsonData = JSON.parse(body);
 
