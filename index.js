@@ -149,7 +149,7 @@ function urlResponseMessage(recipientId, text) {
     var values = text.split(',');
 
     request({
-        url: 'https://www.rgo47.com/api/v2/product/'+values[1],
+        url: 'https://www.rgo47.com/api/v2/product/'+values[1]+'/show',
         method: 'GET',
         headers: {
             'x-language' : 'en',
