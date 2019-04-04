@@ -37,7 +37,7 @@ function setupGetStartedButton(res){
     // };
     var messageData = {
         "get_started":{
-            "payload":"<GET_STARTED_PAYLOAD>"
+            "payload":"get started"
         }
     };
     // Start the request
@@ -106,7 +106,11 @@ app.post('/webhook', function (req, res) {
             if(event.postback.referral) {
                 urlResponseMessage(event.sender.id, event.postback.referral.ref);
             } else {
-                sendMessage(event.sender.id, {text: "Of course you will like it and i know it"});
+                if(event.payload.toLowerCase().includes("get started")) {
+                    sendMessage(event.sender.id, {text: "Thank you for contacting with us. Please leave anything you would like to know. Customer service will reach you very soon!"});
+                } else {
+                    sendMessage(event.sender.id, {text: "Of course you will like it and i know it"});
+                }
             }
         } else if(event.referral) {
             urlResponseMessage(event.sender.id, event.referral.ref)
