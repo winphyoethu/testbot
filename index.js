@@ -71,7 +71,9 @@ app.post('/webhook', function (req, res) {
         console.log("LOG :: ",event)
         if (event.message && event.message.text) {
             if (!kittenMessage(event.sender.id, event.message.text)) {
-                if(event.message.text.toLowerCase().includes("buy")) {
+                if(event.message.text.toLowerCase().includes("confirm buy")){
+                    sendMessage(event.sender.id, {text: "Dear Csutomer, please type in this format to order.\nOrdercode#PhoneNo\nEg.51245#0943134123"});
+                } else if(event.message.text.toLowerCase().includes("buy")) {
                     request({
                         url: 'https://graph.facebook.com/v2.9/'+event.sender.id+'?access_token=EAAZAZCwz2xNCMBAPBQz6Bd8Y99G3RSUHZBYJuJdxULV2E4DIfk37ZBkgMpDzyXGj1NnWWeHxHFgX7SEsGRTc65RxuZBZCIDLXidZCSC7BZCZAGwxspyY1jXHIcIv4jAHXgn6ZBArPyhoUOjqCDPIg5L3PrYyEXZApw8fW88Vj3ZBHNbEfA6ZBeznW1KSZA',
                                 method: 'GET'
@@ -97,8 +99,6 @@ app.post('/webhook', function (req, res) {
                         };
                         sendMessage(event.sender.id, quickReplyMessage);
                     });
-                } else if(event.message.text.toLowerCase().includes("confirm buy")){
-                    sendMessage(event.sender.id, {text: "Dear Csutomer, please type in this format to order.\nOrdercode#PhoneNo\nEg.51245#0943134123"});
                 } else {
                     sendMessage(event.sender.id, {text: "Echo: " + event.message.text});
                 }
