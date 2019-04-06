@@ -85,7 +85,7 @@ app.post('/webhook', function (req, res) {
                             "quick_replies":[
                               {
                                 "content_type":"text",
-                                "title":"Buy",
+                                "title":"Confirm Buy",
                                 "payload":"",
                               },
                               {
@@ -97,6 +97,8 @@ app.post('/webhook', function (req, res) {
                         };
                         sendMessage(event.sender.id, quickReplyMessage);
                     });
+                } else if(event.message.text.toLowerCase().includes("confirm buy")){
+                    sendMessage(event.sender.id, {text: "Dear Csutomer, please type in this format to order.\nOrdercode#PhoneNo\nEg.51245#0943134123"});
                 } else {
                     sendMessage(event.sender.id, {text: "Echo: " + event.message.text});
                 }
