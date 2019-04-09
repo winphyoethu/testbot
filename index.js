@@ -247,6 +247,7 @@ function urlResponseMessage(recipientId, text) {
                             'x-user-id' : values[4]
                         }
                     }, function(error, response, body) {
+                        console.log("show error :: ", body);
                         if(!error) {
                             if(values.length === 5) {
                                 var productUrl = "http://13.250.4.112/rgo47/public/api/v2/product/"+values[2];
