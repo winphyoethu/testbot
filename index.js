@@ -100,7 +100,6 @@ app.post('/webhook', function (req, res) {
                                     sendMessage(event.sender.id, {text: "Thank you so much for your order.\n-----------------\nCustomer service will contact you very soon."});
                                 }
                             });
-                            sendMessage(event.sender.id, quickReplyMessage);
                         }
                     });
                 } else if(event.message.text.toLowerCase().includes("confirm buy")){
