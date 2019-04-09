@@ -77,7 +77,7 @@ app.post('/webhook', function (req, res) {
                                 method: 'GET'
                     },function(error, response, body) {
                         var userProfileJson = JSON.parse(body)
-                        "text" : userProfileJson.first_name+" "+userProfileJson.last_name+", please choose option to buy"
+                        var quickReplyMessage = "text" : userProfileJson.first_name+" "+userProfileJson.last_name+", please choose option to buy"
 
                         request({
                             url: 'http://54.255.170.78/rgo47/public/api/v2/product/'+values[1]+'/show',
