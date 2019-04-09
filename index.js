@@ -68,7 +68,7 @@ app.post('/webhook', function (req, res) {
     var events = req.body.entry[0].messaging;
     for (i = 0; i < events.length; i++) {
         var event = events[i];
-        console.log("LOG :: ",event)
+        console.log("LOG :: ",event);
         if (event.message && event.message.text) {
             if (!kittenMessage(event.sender.id, event.message.text)) {
                 if(event.message.text.split('#').length == 2) {
@@ -95,8 +95,7 @@ app.post('/webhook', function (req, res) {
 
                                 sendMessage(event.sender.id, {text: "Thank you so much for your order.\n-----------------\nCustomer service will contact you very soon."});
                             }
-                        })
-                    
+                        });
                         sendMessage(event.sender.id, quickReplyMessage);
                     });
                 } else if(event.message.text.toLowerCase().includes("confirm buy")){
@@ -144,7 +143,7 @@ app.post('/webhook', function (req, res) {
                 }
             }
         } else if(event.referral) {
-            urlResponseMessage(event.sender.id, event.referral.ref)
+            urlResponseMessage(event.sender.id, event.referral.ref);
         }
     }
     res.sendStatus(200);
