@@ -76,9 +76,6 @@ app.post('/webhook', function (req, res) {
                         url: 'https://graph.facebook.com/v2.9/'+event.sender.id+'?access_token=EAAZAZCwz2xNCMBAPBQz6Bd8Y99G3RSUHZBYJuJdxULV2E4DIfk37ZBkgMpDzyXGj1NnWWeHxHFgX7SEsGRTc65RxuZBZCIDLXidZCSC7BZCZAGwxspyY1jXHIcIv4jAHXgn6ZBArPyhoUOjqCDPIg5L3PrYyEXZApw8fW88Vj3ZBHNbEfA6ZBeznW1KSZA',
                                 method: 'GET'
                     },function(error, response, body) {
-                        var userProfileJson = JSON.parse(body)
-                        var quickReplyMessage = "text" : userProfileJson.first_name+" "+userProfileJson.last_name+", please choose option to buy"
-
                         request({
                             url: 'http://54.255.170.78/rgo47/public/api/v2/product/'+values[1]+'/show',
                             method: 'GET',
