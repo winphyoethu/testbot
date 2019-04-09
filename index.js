@@ -138,8 +138,6 @@ app.post('/webhook', function (req, res) {
                         };
                         sendMessage(event.sender.id, quickReplyMessage);
                     });
-                } else if (event.message.text.toLowerCase().include("confrim cancel")) {
-
                 } else {
                     sendMessage(event.sender.id, {text: "Echo: " + event.message.text});
                 }
@@ -166,7 +164,7 @@ app.post('/webhook', function (req, res) {
 // generic function sending messages
 function sendMessage(recipientId, message) {
     request({
-        url: 'https://graph.facebook.com/v2.9/me/messages',
+        url: 'https://graph.facebook.com/v2.6/me/messages',
         qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
         method: 'POST',
         json: {
