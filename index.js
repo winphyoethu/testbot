@@ -71,7 +71,35 @@ app.post('/webhook', function (req, res) {
         console.log("LOG :: ",event)
         if (event.message && event.message.text) {
             if (!kittenMessage(event.sender.id, event.message.text)) {
-                if(event.message.text.toLowerCase().includes("confirm buy")){
+                if(event.message.text.split('#').length == 2) {
+                    request({
+                        url: 'https://graph.facebook.com/v2.9/'+event.sender.id+'?access_token=EAAZAZCwz2xNCMBAPBQz6Bd8Y99G3RSUHZBYJuJdxULV2E4DIfk37ZBkgMpDzyXGj1NnWWeHxHFgX7SEsGRTc65RxuZBZCIDLXidZCSC7BZCZAGwxspyY1jXHIcIv4jAHXgn6ZBArPyhoUOjqCDPIg5L3PrYyEXZApw8fW88Vj3ZBHNbEfA6ZBeznW1KSZA',
+                                method: 'GET'
+                    },function(error, response, body) {
+                        var userProfileJson = JSON.parse(body)
+                        "text" : userProfileJson.first_name+" "+userProfileJson.last_name+", please choose option to buy"
+
+                        request({
+                            url: 'http://54.255.170.78/rgo47/public/api/v2/product/'+values[1]+'/show',
+                            method: 'GET',
+                            headers: {
+                                'x-language' : 'en',
+                                'x-api-secret-key' : '7KG2D00LQrG1tKlTruzbujKCGVME0M3aOHN0yhsdEUNyLE6NVhS',
+                                'x-device-id' :'messenger',
+                                'x-app-version' : '7.0',
+                                'x-user-id' : '83596'
+                            }
+                        }, function (error,response, body) {
+                            if(!error) {
+                                var jsonData = JSON.parse(body);   
+
+                                sendMessage(event.sender.id, {text: "Thank you so much for your order.\n-----------------\nCustomer service will contact you very soon."});
+                            }
+                        })
+                    
+                        sendMessage(event.sender.id, quickReplyMessage);
+                    });
+                } else if(event.message.text.toLowerCase().includes("confirm buy")){
                     sendMessage(event.sender.id, {text: "Dear Csutomer, please type in this format to order.\n\n-----------------\nOrdercode#PhoneNo\n-----------------\nEg.51245#0943134123"});
                 } else if(event.message.text.toLowerCase().includes("buy")) {
                     request({
@@ -184,85 +212,112 @@ function urlResponseMessage(recipientId, text) {
     var values = text.split(',');
 
     request({
-        url: 'https://www.rgo47.com/api/v2/product/'+values[1]+'/show',
-        method: 'GET',
-        headers: {
-            'x-language' : 'en',
-            'x-api-secret-key' : '7KG2D00LQrG1tKlTruzbujKCGVME0M3aOHN0yhsdEUNyLE6NVhS',
-            'x-device-id' :'1234567',
-            'x-app-version' : '1.1.1',
-            'x-user-id' : '83596'
-        }
-    },
-    function(error, response, body) {
+        url: 'https://graph.facebook.com/v2.9/'+recipientId+'?access_token=EAAZAZCwz2xNCMBAPBQz6Bd8Y99G3RSUHZBYJuJdxULV2E4DIfk37ZBkgMpDzyXGj1NnWWeHxHFgX7SEsGRTc65RxuZBZCIDLXidZCSC7BZCZAGwxspyY1jXHIcIv4jAHXgn6ZBArPyhoUOjqCDPIg5L3PrYyEXZApw8fW88Vj3ZBHNbEfA6ZBeznW1KSZA',
+        method: 'GET'
+    }, function(error, response, body) {
         if(!error) {
-            console.log("RESPONSE :: ", body);
-            if(values.length === 3) {
-                var productUrl = "https://www.rgo47.com/product/"+values[2];
+            console.log("userprofile :: ", body);
+            var userProfileJson = JSON.parse(body);
 
-                var jsonData = JSON.parse(body);
-
-                console.log("RESPONSE :: ", jsonData.response);
-                console.log("META :: ", jsonData.meta);
-                console.log("DATA :: ", jsonData.data);
-
-                message = {
-                    "attachment": {
-                        "type": "template",
-                        "payload": {
-                            "template_type": "generic",
-                                "elements": [{
-                                    "title": "Rgo47",
-                                    "subtitle": jsonData.data.name,
-                                    "image_url": jsonData.data.feature_image,
-                                    "default_action": {
-                                        "type": "web_url",
-                                        "url": jsonData.data.feature_image,
-                                        "webview_height_ratio": "tall",
-                                    },
-                                    "buttons": [{
-                                        "type": "web_url",
-                                        "url": productUrl,
-                                        "title": "Show Products",
-                                        "webview_height_ratio": "tall"
-                                        }, {
-                                        "type": "element_share",
-                                        "share_contents": { 
-                                            "attachment": {
-                                            "type": "template",
-                                            "payload": {
-                                                    "template_type" : "generic",
-                                                    "elements": [{
-                                                        "title": "Rgo47",
-                                                        "subtitle": jsonData.data.name,
-                                                        "image_url": jsonData.data.feature_image,
-                                                        "default_action": {
-                                                            "type": "web_url",
-                                                            "url": jsonData.data.feature_image,
-                                                            "webview_height_ratio": "tall",
-                                                        },
-                                                        "buttons" : [{
-                                                            "type": "web_url",
-                                                            "url": productUrl,
-                                                            "title": "Show Products",
-                                                            "webview_height_ratio": "tall"
-                                                        }]
-                                                    }]
-                                                }
-                                            }
-                                        }
-                                    }]
-                                }]
+            request({
+                url: 'http://54.255.170.78/rgo47/public/api/v2/messenger-cart',
+                method: 'POST',
+                headers: {
+                    'x-language' : 'en',
+                    'x-api-secret-key' : '7KG2D00LQrG1tKlTruzbujKCGVME0M3aOHN0yhsdEUNyLE6NVhS',
+                    'x-device-id' :'messenger',
+                    'x-app-version' : '7.0',
+                    'x-user-id' : values[4],
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                form: {
+                    'customer_id' : values[3],
+                    'customer_phone' : values[4],
+                    'fb_id' : userProfileJson.id,
+                    'fb_username': userProfileJson.first_name+" "+userProfileJson.last_name,
+                    'product_id': values[1]
+                }
+            }, function(error, response, body) {
+                console.log("post checkout :: ", body);
+                if(!error) {
+                    request({
+                        url: 'http://54.255.170.78/rgo47/public/api/v2/product/'+values[1]+'/show',
+                        method: 'GET',
+                        headers: {
+                            'x-language' : 'en',
+                            'x-api-secret-key' : '7KG2D00LQrG1tKlTruzbujKCGVME0M3aOHN0yhsdEUNyLE6NVhS',
+                            'x-device-id' :'messenger',
+                            'x-app-version' : '7.0',
+                            'x-user-id' : values[4]
                         }
-                    }
-                };
-                sendMessage(recipientId, message);
-                sendMessage(recipientId, {text: "Customer service will reach you soon. Thank you for your interest"});
-                return true;
-            }
-            return false;                           
-        } else {
-            console.log("ERROR :: ", error);
+                    }, function(error, response, body) {
+                        if(!error) {
+                            if(values.length === 5) {
+                                var productUrl = "http://54.255.170.78/rgo47/public/api/v2/product/"+values[2];
+                                var jsonData = JSON.parse(body);
+
+                                message = {
+                                    "attachment": {
+                                        "type": "template",
+                                        "payload": {
+                                            "template_type": "generic",
+                                                "elements": [{
+                                                    "title": "Rgo47",
+                                                    "subtitle": jsonData.data.name,
+                                                    "image_url": jsonData.data.feature_image,
+                                                    "default_action": {
+                                                        "type": "web_url",
+                                                        "url": jsonData.data.feature_image,
+                                                        "webview_height_ratio": "tall",
+                                                    },
+                                                    "buttons": [{
+                                                        "type": "web_url",
+                                                        "url": productUrl,
+                                                        "title": "Show Products",
+                                                        "webview_height_ratio": "tall"
+                                                        }, {
+                                                        "type": "element_share",
+                                                        "share_contents": { 
+                                                            "attachment": {
+                                                            "type": "template",
+                                                            "payload": {
+                                                                    "template_type" : "generic",
+                                                                    "elements": [{
+                                                                        "title": "Rgo47",
+                                                                        "subtitle": jsonData.data.name,
+                                                                        "image_url": jsonData.data.feature_image,
+                                                                        "default_action": {
+                                                                            "type": "web_url",
+                                                                            "url": jsonData.data.feature_image,
+                                                                            "webview_height_ratio": "tall",
+                                                                        },
+                                                                        "buttons" : [{
+                                                                            "type": "web_url",
+                                                                            "url": productUrl,
+                                                                            "title": "Show Products",
+                                                                            "webview_height_ratio": "tall"
+                                                                        }]
+                                                                    }]
+                                                                }
+                                                            }
+                                                        }
+                                                    }]
+                                                }]
+                                        }
+                                    }
+                                };
+                                sendMessage(recipientId, message);
+                                sendMessage(recipientId, {text: "Order has been placed. Thanks for using messenger check out!"});
+                                sendMessage(recipientId, {text: "Customer service will reach you soon. Thank you for your interest"});
+                                return true;
+                            }
+                            return false;                           
+                        } else {
+                            console.log("ERROR :: ", error);
+                        }
+                    });  
+                }
+            });
         }
     });
 
