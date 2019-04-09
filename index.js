@@ -249,7 +249,7 @@ function urlResponseMessage(recipientId, text) {
                     }, function(error, response, body) {
                         if(!error) {
                             if(values.length === 5) {
-                                var productUrl = "http://54.255.170.78/rgo47/public/api/v2/product/"+values[2];
+                                var productUrl = "http://13.250.4.112/rgo47/public/api/v2/product/"+values[2];
                                 var jsonData = JSON.parse(body);
 
                                 message = {
