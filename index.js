@@ -76,24 +76,32 @@ app.post('/webhook', function (req, res) {
                         url: 'https://graph.facebook.com/v2.9/'+event.sender.id+'?access_token=EAAZAZCwz2xNCMBAPBQz6Bd8Y99G3RSUHZBYJuJdxULV2E4DIfk37ZBkgMpDzyXGj1NnWWeHxHFgX7SEsGRTc65RxuZBZCIDLXidZCSC7BZCZAGwxspyY1jXHIcIv4jAHXgn6ZBArPyhoUOjqCDPIg5L3PrYyEXZApw8fW88Vj3ZBHNbEfA6ZBeznW1KSZA',
                                 method: 'GET'
                     },function(error, response, body) {
-                        request({
-                            url: 'http://54.255.170.78/rgo47/public/api/v2/product/'+values[1]+'/show',
-                            method: 'GET',
-                            headers: {
-                                'x-language' : 'en',
-                                'x-api-secret-key' : '7KG2D00LQrG1tKlTruzbujKCGVME0M3aOHN0yhsdEUNyLE6NVhS',
-                                'x-device-id' :'messenger',
-                                'x-app-version' : '7.0',
-                                'x-user-id' : '83596'
-                            }
-                        }, function (error,response, body) {
-                            if(!error) {
-                                var jsonData = JSON.parse(body);   
-
-                                sendMessage(event.sender.id, {text: "Thank you so much for your order.\n-----------------\nCustomer service will contact you very soon."});
-                            }
-                        });
-                        sendMessage(event.sender.id, quickReplyMessage);
+                        if(!error) {
+                            var userProfileJson = JSON.parse(body)
+                            var orderConfirmAry = event.message.text.split('#');
+                            request({
+                                url: 'http://54.255.170.78/rgo47/public/api/messenger/checkout',
+                                method: 'POST',
+                                headers: {
+                                    'x-language' : 'en',
+                                    'x-api-secret-key' : '7KG2D00LQrG1tKlTruzbujKCGVME0M3aOHN0yhsdEUNyLE6NVhS',
+                                    'x-device-id' :'messenger',
+                                    'x-app-version' : '7.0',
+                                    'x-user-id' : '0',
+                                    'Content-Type': 'application/x-www-form-urlencoded'
+                                }
+                                form : {
+                                    'cart_id' : orderConfirmAry[0],
+                                    'fb_id' : userProfileJson.id,
+                                    'phone_number' : orderConfirmAry[1],
+                                }
+                            }, function (error,response, body) {
+                                if(!error) {
+                                    sendMessage(event.sender.id, {text: "Thank you so much for your order.\n-----------------\nCustomer service will contact you very soon."});
+                                }
+                            });
+                            sendMessage(event.sender.id, quickReplyMessage);
+                        }
                     });
                 } else if(event.message.text.toLowerCase().includes("confirm buy")){
                     sendMessage(event.sender.id, {text: "Dear Csutomer, please type in this format to order.\n\n-----------------\nOrdercode#PhoneNo\n-----------------\nEg.51245#0943134123"});
