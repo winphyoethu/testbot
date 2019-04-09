@@ -175,7 +175,7 @@ function kittenMessage(recipientId, text) {
     if (values.length === 3 && values[0] === 'kitten') {
         if (Number(values[1]) > 0 && Number(values[2]) > 0) {
             var imageUrl = "https://placekitten.com/" + Number(values[1]) + "/" + Number(values[2]);
-            message = {
+            var message = {
                 "attachment": {
                     "type": "template",
                     "payload": {
@@ -250,10 +250,10 @@ function urlResponseMessage(recipientId, text) {
                         console.log("show error :: ", body);
                         if(!error) {
                             if(values.length === 5) {
-                                var productUrl = "http://13.250.4.112/rgo47/public/api/v2/product/"+values[2];
+                                var productUrl = "https://www.rgo47.com/api/v2/product/"+values[2];
                                 var jsonData = JSON.parse(body);
 
-                                message = {
+                                var message = {
                                     "attachment": {
                                         "type": "template",
                                         "payload": {
