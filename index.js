@@ -237,6 +237,10 @@ function urlResponseMessage(recipientId, text) {
                 var checkOutJson = JSON.parse(body);
                 console.log("post checkout :: ", body);
                 if(!error) {
+                    sendMessage(recipientId, {text: "Order has been placed. Thanks for using messenger check out!"});
+                    sendMessage(recipientId, {text: "Customer service will reach you soon. Thank you for your interest"});
+                    sendMessage(recipientId, {text: "To confrim check out, please use this order code - "+checkOutJson.data.cart_id});
+
                     request({
                         url: 'http://54.255.170.78/rgo47/public/api/v2/product/'+values[1]+'/show',
                         method: 'GET',
@@ -305,9 +309,6 @@ function urlResponseMessage(recipientId, text) {
                                     }
                                 };
                                 sendMessage(recipientId, message);
-                                sendMessage(recipientId, {text: "Order has been placed. Thanks for using messenger check out!"});
-                                sendMessage(recipientId, {text: "Customer service will reach you soon. Thank you for your interest"});
-                                sendMessage(recipientId, {text: "To confrim check out, please use this order code - "+checkOutJson.data.cart_id+"."});
                                 return true;
                             }
                             return false;                           
