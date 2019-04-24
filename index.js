@@ -100,6 +100,7 @@ app.post('/webhook', function (req, res) {
                                     var responseJson = JSON.parse(body)
 
                                     if(responseJson.response.code == 200) {
+                                        sendMessage(event.sender.id, {text: "​ေအာ္ဒါတင္ျပီးပါျပီ။"});
                                         sendMessage(event.sender.id, {text: "rgo မွမွာယူမွုအတြက္ အထူး​ေက်းဇူးတင္ပါတယ္။\n-----------------\nCustomer Service မွအျမန္ဆံုးဆက္သြယ္ပါလိမ့္မယ္။"});
                                     } else {
                                         sendMessage(event.sender.id, {text: "သင္မွာယူထား​ေသာ ​ေအာ္ဒါမရွိပါ။"});
@@ -111,7 +112,6 @@ app.post('/webhook', function (req, res) {
                         }
                     });
                 } else if(event.message.text.toLowerCase().includes("confirm buy")){
-                    sendMessage(event.sender.id, {text: "​ေအာ္ဒါတင္ျပီးပါျပီ။"});
                     sendMessage(event.sender.id, {text: "Messenger မွ ​ေအာ္ဒါတင္ရန္​ ​ေအာက္ပါပံုစံအတိုင္း ရိုက္ထည့္ပါ\n\n-----------------\nOrdercode#PhoneNo\n-----------------\nEg.51245#0943134123"});
                 } else if(event.message.text.toLowerCase().includes("buy") || event.message.text.toLowerCase().includes("ဝယ္") || event.message.text.toLowerCase().includes("ဝယ်") || event.message.text.toLowerCase().includes("၀ယ်") || event.message.text.toLowerCase().includes("၀ယ္")) {
                     request({
