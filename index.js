@@ -111,6 +111,7 @@ app.post('/webhook', function (req, res) {
                         }
                     });
                 } else if(event.message.text.toLowerCase().includes("confirm buy")){
+
                     sendMessage(event.sender.id, {text: "Messenger မွ ​ေအာ္ဒါတင္ရန္​ ​ေအာက္ပါပံုစံအတိုင္း ရိုက္ထည့္ပါ\n\n-----------------\nOrdercode#PhoneNo\n-----------------\nEg.51245#0943134123"});
                 } else if(event.message.text.toLowerCase().includes("buy") || event.message.text.toLowerCase().includes("ဝယ္") || event.message.text.toLowerCase().includes("ဝယ်") || event.message.text.toLowerCase().includes("၀ယ်") || event.message.text.toLowerCase().includes("၀ယ္")) {
                     request({
@@ -136,6 +137,7 @@ app.post('/webhook', function (req, res) {
                               }
                             ]
                         };
+                        sendMessage(event.sender.id, {text: "​ေအာ္ဒါတင္ျပီးပါျပီ။"});
                         sendMessage(event.sender.id, quickReplyMessage);
                     });
                 } else if(event.message.text.toLowerCase().includes("confirm cancel")) {
