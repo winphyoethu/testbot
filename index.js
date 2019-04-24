@@ -112,7 +112,7 @@ app.post('/webhook', function (req, res) {
                     });
                 } else if(event.message.text.toLowerCase().includes("confirm buy")){
                     sendMessage(event.sender.id, {text: "Messenger မွ ​ေအာ္ဒါတင္ရန္​ ​ေအာက္ပါပံုစံအတိုင္း ရိုက္ထည့္ပါ\n\n-----------------\nOrdercode#PhoneNo\n-----------------\nEg.51245#0943134123"});
-                } else if(event.message.text.toLowerCase().includes("buy") || event.message.text.toLowerCase().includes("ဝယ္") || event.message.text.toLowerCase().includes("ဝယ်")) {
+                } else if(event.message.text.toLowerCase().includes("buy") || event.message.text.toLowerCase().includes("ဝယ္") || event.message.text.toLowerCase().includes("ဝယ်") || event.message.text.toLowerCase().includes("၀ယ်") || event.message.text.toLowerCase().includes("၀ယ္")) {
                     request({
                         url: 'https://graph.facebook.com/v2.9/'+event.sender.id+'?access_token=EAAZAZCwz2xNCMBAPBQz6Bd8Y99G3RSUHZBYJuJdxULV2E4DIfk37ZBkgMpDzyXGj1NnWWeHxHFgX7SEsGRTc65RxuZBZCIDLXidZCSC7BZCZAGwxspyY1jXHIcIv4jAHXgn6ZBArPyhoUOjqCDPIg5L3PrYyEXZApw8fW88Vj3ZBHNbEfA6ZBeznW1KSZA',
                                 method: 'GET'
@@ -122,7 +122,7 @@ app.post('/webhook', function (req, res) {
                         var userProfileJson = JSON.parse(body)
 
                         var quickReplyMessage = {
-                            "text" : userProfileJson.first_name+" "+userProfileJson.last_name+", ဝယ္မည္ဆိုပါက Confirm Buy ကို​ေရြးျပီး မ​ဝယ္​ေတာ့ဘူးဆိုပါက Confirm Cancel ကို​ေရြးခ်ယ္​ေပးပါ",
+                            "text" : userProfileJson.first_name+" "+userProfileJson.last_name+",\nဝယ္မည္ဆိုပါက Confirm Buy ကိုႏွိပ္ပါ။\nမ​ဝယ္​ေတာ့ဘူးဆိုပါက Confirm Cancel ကိုႏွိပ္ပါ။",
                             "quick_replies":[
                               {
                                 "content_type":"text",
@@ -139,7 +139,7 @@ app.post('/webhook', function (req, res) {
                         sendMessage(event.sender.id, quickReplyMessage);
                     });
                 } else if(event.message.text.toLowerCase().includes("confirm cancel")) {
-                    sendMessage(event.sender.id, {text: "သင့္​ေအာ္ဒါကို ပယ္​ဖ်က္ျပီးပါျပီ"});
+                    sendMessage(event.sender.id, {text: "သင့္​ေအာ္ဒါကို ပယ္​ဖ်က္ျပီးပါျပီ။"});
                 } 
             }
         } else if (event.postback) {
@@ -251,8 +251,8 @@ function urlResponseMessage(recipientId, text) {
                 console.log("post checkout :: ", body);
                 if(!error) {
                     sendMessage(recipientId, {text: "​ေအာ္ဒါ တင္ျပီးပါျပီ။ Messenger မွမွာယူျခင္းအတြက္ အထူးေက်းဇူးတင္ပါတယ္။"});
-                    sendMessage(recipientId, {text: "မွအျမန္ဆံုး စာျပန္ပါလိမ့္မယ္။ စိတ္ဝင္စားမွုအတြက္​ေက်းဇူးတင္ပါတယ္။"});
-                    sendMessage(recipientId, {text: "Messenger မွ ​ေအာ္ဒါတင္ရန္ ​ေအာက္ပါ ​ကုဒ္ကို အသံုးျပုပါ - "+checkOutJson.data.cart_id});
+                    sendMessage(recipientId, {text: "Customer Service မွအျမန္ဆံုး စာျပန္ပါလိမ့္မယ္။ စိတ္ဝင္စားမွုအတြက္​ေက်းဇူးတင္ပါတယ္။"});
+                    sendMessage(recipientId, {text: "Messenger မှ အော်ဒါတင်ရန် အောက်ပါ ကုဒ်ကို အသုံးပြုပါ - "+checkOutJson.data.cart_id});
 
                     request({
                         url: 'http://54.255.170.78/rgo47/public/api/v2/product/'+values[1]+'/show',
