@@ -100,19 +100,19 @@ app.post('/webhook', function (req, res) {
                                     var responseJson = JSON.parse(body)
 
                                     if(responseJson.response.code == 200) {
-                                        sendMessage(event.sender.id, {text: "Thank you so much for your order.\n-----------------\nCustomer service will contact you very soon."});
+                                        sendMessage(event.sender.id, {text: "rgo မွမွာယူမွုအတြက္ အထူး​ေက်းဇူးတင္ပါတယ္။\n-----------------\nCustomer Service မွအျမန္ဆံုးဆက္သြယ္ပါလိမ့္မယ္။"});
                                     } else {
-                                        sendMessage(event.sender.id, {text: "There is no such order"});
+                                        sendMessage(event.sender.id, {text: "သင္မွာယူထား​ေသာ ​ေအာ္ဒါမရွိပါ။"});
                                     }
                                 } else {
-                                    sendMessage(event.sender.id, {text: "There is no such order"});
+                                    sendMessage(event.sender.id, {text: "သင္မွာယူထား​ေသာ ​ေအာ္ဒါမရွိပါ။"});
                                 }
                             });
                         }
                     });
                 } else if(event.message.text.toLowerCase().includes("confirm buy")){
                     sendMessage(event.sender.id, {text: "Messenger မွ ​ေအာ္ဒါတင္ရန္​ ​ေအာက္ပါပံုစံအတိုင္း ရိုက္ထည့္ပါ\n\n-----------------\nOrdercode#PhoneNo\n-----------------\nEg.51245#0943134123"});
-                } else if(event.message.text.toLowerCase().includes("buy")) {
+                } else if(event.message.text.toLowerCase().includes("buy") || event.message.text.toLowerCase().includes("ဝယ္") || event.message.text.toLowerCase().includes("ဝယ်")) {
                     request({
                         url: 'https://graph.facebook.com/v2.9/'+event.sender.id+'?access_token=EAAZAZCwz2xNCMBAPBQz6Bd8Y99G3RSUHZBYJuJdxULV2E4DIfk37ZBkgMpDzyXGj1NnWWeHxHFgX7SEsGRTc65RxuZBZCIDLXidZCSC7BZCZAGwxspyY1jXHIcIv4jAHXgn6ZBArPyhoUOjqCDPIg5L3PrYyEXZApw8fW88Vj3ZBHNbEfA6ZBeznW1KSZA',
                                 method: 'GET'
@@ -122,7 +122,7 @@ app.post('/webhook', function (req, res) {
                         var userProfileJson = JSON.parse(body)
 
                         var quickReplyMessage = {
-                            "text" : userProfileJson.first_name+" "+userProfileJson.last_name+", please choose option to buy",
+                            "text" : userProfileJson.first_name+" "+userProfileJson.last_name+", ဝယ္မည္ဆိုပါက Confirm Buy ကို​ေရြးျပီး မ​ဝယ္​ေတာ့ဘူးဆိုပါက Confirm Cancel ကို​ေရြးခ်ယ္​ေပးပါ",
                             "quick_replies":[
                               {
                                 "content_type":"text",
@@ -139,7 +139,7 @@ app.post('/webhook', function (req, res) {
                         sendMessage(event.sender.id, quickReplyMessage);
                     });
                 } else if(event.message.text.toLowerCase().includes("confirm cancel")) {
-                    sendMessage(event.sender.id, {text: "Your order has been cancelled"});
+                    sendMessage(event.sender.id, {text: "သင့္​ေအာ္ဒါကို ပယ္​ဖ်က္ျပီးပါျပီ"});
                 } 
             }
         } else if (event.postback) {
@@ -150,8 +150,6 @@ app.post('/webhook', function (req, res) {
                 console.log("cancer :: ", event);
                 if(event.postback.payload.toLowerCase().includes("get started")) {
                     sendMessage(event.sender.id, {text: "rgo47 ကိုစိတ္ဝင္စားျခင္းအတြက္ ​ေက်းဇူးတင္ပါတယ္။ သိခ်င္တာ​ေလးမ်ား​ ​ေမးထားလုိ့ရပါတယ္။ Customer Service မွမျကာမီ ​အ​ေျကာင္းျပန္ပါလိမ့္မယ္"});
-                } else {
-                    sendMessage(event.sender.id, {text: "Of course you will like it and i know it"});
                 }
             }
         } else if(event.referral) {
@@ -252,8 +250,8 @@ function urlResponseMessage(recipientId, text) {
                 var checkOutJson = JSON.parse(body);
                 console.log("post checkout :: ", body);
                 if(!error) {
-                    sendMessage(recipientId, {text: "​ေအာ္ဒါ တင္ျပီးပါျပီ။ Messenger မွမွာယူျခင္းအတြက္ အထူး​ေက်းဇူးတင္ပါသည္။"});
-                    sendMessage(recipientId, {text: "Customer service will reach you soon. Thank you for your interest"});
+                    sendMessage(recipientId, {text: "​ေအာ္ဒါ တင္ျပီးပါျပီ။ Messenger မွမွာယူျခင္းအတြက္ အထူးေက်းဇူးတင္ပါတယ္။"});
+                    sendMessage(recipientId, {text: "မွအျမန္ဆံုး စာျပန္ပါလိမ့္မယ္။ စိတ္ဝင္စားမွုအတြက္​ေက်းဇူးတင္ပါတယ္။"});
                     sendMessage(recipientId, {text: "Messenger မွ ​ေအာ္ဒါတင္ရန္ ​ေအာက္ပါ ​ကုဒ္ကို အသံုးျပုပါ - "+checkOutJson.data.cart_id});
 
                     request({
