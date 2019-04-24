@@ -254,7 +254,7 @@ function urlResponseMessage(recipientId, text) {
                 if(!error) {
                     sendMessage(recipientId, {text: "​ေအာ္ဒါ တင္ျပီးပါျပီ။ Messenger မွမွာယူျခင္းအတြက္ အထူးေက်းဇူးတင္ပါတယ္။"});
                     sendMessage(recipientId, {text: "Customer Service မွအျမန္ဆံုး စာျပန္ပါလိမ့္မယ္။ စိတ္ဝင္စားမွုအတြက္​ေက်းဇူးတင္ပါတယ္။"});
-                    sendMessage(recipientId, {text: "Messenger မှ အော်ဒါတင်ရန် အောက်ပါ ကုဒ်ကို အသုံးပြုပါ - "+checkOutJson.data.cart_id});
+                    sendMessage(recipientId, {text: "Messenger မွ ေအာ္ဒါတင္ရန္ ေအာက္ပါ ကုဒ္ကို အသုံးျပဳပါ - "+checkOutJson.data.cart_id});
 
                     request({
                         url: 'http://54.255.170.78/rgo47/public/api/v2/product/'+values[1]+'/show',
