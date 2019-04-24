@@ -123,7 +123,7 @@ app.post('/webhook', function (req, res) {
                         var userProfileJson = JSON.parse(body)
 
                         var quickReplyMessage = {
-                            "text" : userProfileJson.first_name+" "+userProfileJson.last_name+",\nဝယ္မည္ဆိုပါက Confirm Buy ကိုႏွိပ္ပါ။\nမ​ဝယ္​ေတာ့ဘူးဆိုပါက Confirm Cancel ကိုႏွိပ္ပါ။",
+                            "text" : userProfileJson.first_name+" "+userProfileJson.last_name+",\nဝယ္မည္ဆိုပါက Confirm Buy ကိုႏွိပ္ပါ။\n-----------------\nမ​ဝယ္​ေတာ့ဘူးဆိုပါက Confirm Cancel ကိုႏွိပ္ပါ။",
                             "quick_replies":[
                               {
                                 "content_type":"text",
