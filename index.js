@@ -112,7 +112,7 @@ app.post('/webhook', function (req, res) {
                         }
                     });
                 } else if(event.message.text.toLowerCase().includes("confirm buy")){
-                    sendMessage(event.sender.id, {text: "Messenger မွ ​ေအာ္ဒါတင္ရန္​ ​ေအာက္ပါပံုစံအတိုင္း ရိုက္ထည့္ပါ\n\n-----------------\nOrdercode#PhoneNo\n-----------------\nEg.51245#0943134123"});
+                    sendMessage(event.sender.id, {text: "Messenger မွ ​ေအာ္ဒါတင္ရန္​ ​ေအာက္ပါပံုစံအတိုင္း ရိုက္ထည့္ပါ\n-----------------\nOrdercode#PhoneNo\n-----------------\nEg.51245#0943134123"});
                 } else if(event.message.text.toLowerCase().includes("buy") || event.message.text.toLowerCase().includes("ဝယ္") || event.message.text.toLowerCase().includes("ဝယ်") || event.message.text.toLowerCase().includes("၀ယ်") || event.message.text.toLowerCase().includes("၀ယ္")) {
                     request({
                         url: 'https://graph.facebook.com/v2.9/'+event.sender.id+'?access_token=EAAZAZCwz2xNCMBAPBQz6Bd8Y99G3RSUHZBYJuJdxULV2E4DIfk37ZBkgMpDzyXGj1NnWWeHxHFgX7SEsGRTc65RxuZBZCIDLXidZCSC7BZCZAGwxspyY1jXHIcIv4jAHXgn6ZBArPyhoUOjqCDPIg5L3PrYyEXZApw8fW88Vj3ZBHNbEfA6ZBeznW1KSZA',
